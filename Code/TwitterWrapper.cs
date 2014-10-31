@@ -47,6 +47,7 @@ namespace xceedAssignment.Code
                         Retweet_Count = status.RetweetCount,
                         Status = new TweetStatus()
                         {
+                            RetweetCount = status.RetweetCount,
                             CreatedDate = status.CreatedDate,
                             IdStr = status.IdStr,
                             InReplyToScreenName = status.InReplyToScreenName,

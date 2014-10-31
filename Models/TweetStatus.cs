@@ -22,6 +22,8 @@ namespace xceedAssignment.Models
         public virtual string TextAsHtml { get; set; }
         public virtual string TextDecoded { get; set; }
 
+        public int RetweetCount { get; set; }
+
         public TweetUser user { get; set; }
 
     }
