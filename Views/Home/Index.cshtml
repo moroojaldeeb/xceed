@@ -1,0 +1,55 @@
+﻿<div class="jumbotron">
+    <h1>Twitter Search</h1>
+    <form method="get">
+
+        <p>Add Your Keywords in here , Separated by space</p>
+        <input type="text" id="keywords" name="keywords" />
+        <input type="button" id="search" name="search" value="Search" />
+    </form>
+
+
+    <script id="twitterTemplate" type="text/x-jsrender">
+        <div>
+            <div class="row">
+                <a class="col-md-3" href="https://twitter.com/{{:user.ScreenName}}"><img src="{{:user.ProfileImageUrl}}" alt="{{:user.Name}}" /></a>
+                <p class="col-md-3"><b>{{:user.Name}}:</b> {{:Text}} <span>(on: {{:CreatedDate}})</span></></p>
+                <div class="col-md-3">
+                    <h3><u><b>Statistics</b></u></h3>
+                    <span class="elem">Followers Count :{{:user.FollowersCount}} </span>
+                    <span class="elem">Friends Count :{{:user.FriendsCount}} </span>
+
+
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <div id="results">
+        <!-- Top Retweed -->
+        <h2>Top Reweeted</h2>
+        <div id="toptweeted">
+
+        </div>
+
+
+        <!-- Top Followed -->
+        <h2>Top Followed</h2>
+        <div id="topfollowed">
+
+        </div>
+        <!-- Top Mentioned -->
+        <h2>Top Mentioned</h2>
+        <div id="topmentioned">
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div>
+        <h2>Getting started</h2>
+        <div id="alldata">
+
+        </div>
+    </div>
+    
+</div>
