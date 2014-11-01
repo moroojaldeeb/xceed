@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TweetSharp;
+using xceedAssignment.Code;
 
 namespace xceedAssignment.Models
 {
@@ -12,7 +13,7 @@ namespace xceedAssignment.Models
         public int NumberOfTweets { get; set; }
         public List<TweetStatus> TopRetweeted { get; set; }
         public List<TweetStatus> TopFollowed { get; set; }
-        public List<TweetStatus> TopMentioned { get; set; }
+        public List<TopMentioned> TopMentioned { get; set; }
 
     }
 }

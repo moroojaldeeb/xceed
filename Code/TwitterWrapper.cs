@@ -4,12 +4,16 @@ using System.Linq;
 using System.Web;
 using TweetSharp;
 using xceedAssignment.Models;
+
+
 namespace xceedAssignment.Code
 {
     public class TwitterWrapper
     {
         public const string ACCESS_TOKEN = "1315465526-bbgGsFE0PQoDY60dM8IsiJBH7TwfuNNynxNjI2G";
         public const string TOKEN_SECRET = "uUgIWiM1NSkpLd824UoCciF7TzP4ypCRJJjbNguIFodzN";
+
+        
         public static List<TweetStats> getTweets(string keyword)
         {
             try
@@ -112,5 +116,74 @@ namespace xceedAssignment.Code
                 return null;
             }
         }
+
+
+
+
+        public static List<TopMentioned> GetTopMentioned(List<TweetStats> tweets)
+        {
+            try
+            {
+
+                List<TopMentioned> topMentionedList = new List<TopMentioned>();
+
+
+                //Extracting Twitter UserNames from All Tweets Text
+                var tweetTexts = tweets.Select(t => t.Status).ToList();
+
+               
+
+                foreach(TweetStatus status in tweetTexts)
+                {
+                    var userNames = status.Text.getTwitterUserNames();
+                    string[] words = status.Text.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach(string username in userNames)
+                    {
+                        var mentionedQuery = from word in words
+                                             where word.ToLowerInvariant() == username.ToLowerInvariant()
+                                             select word;
+
+                        var Topmentioned = new TopMentioned() { Count = mentionedQuery.Count() , UserName=username };
+
+                         if(topMentionedList.Contains(Topmentioned))
+                         {
+                             var top = topMentionedList.Where(t => t.contains(Topmentioned.UserName)).Single();
+
+                             top.Count += Topmentioned.Count;
+                         }
+                         else
+                         {
+                             topMentionedList.Add(Topmentioned);
+                         }
+                    }
+                }
+
+
+                //Calculate for each UserName , the number of occurrences in ALL Tweets Texts
+
+
+
+
+
+
+                return topMentionedList;
+
+
+                                       
+
+
+
+            }catch(Exception s)
+            {
+                return null;
+            }
+        }
+    
     }
+
+
+
+
+ 
 }

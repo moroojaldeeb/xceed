@@ -32,14 +32,16 @@ namespace xceedAssignment.Controllers
                 var topFollowed = results.OrderByDescending(tweet => tweet.Followers_Count).Take(5).Select(tweet => tweet.Status);
 
                 //Get Top Mentioned
-                var topMentioned = results.OrderByDescending(tweet => tweet.Friends_Count).Take(5).Select(tweet => tweet.Status);
+                //var topMentioned = results.OrderByDescending(tweet => tweet.Friends_Count).Take(5).Select(tweet => tweet.Status);
+                var topMentioned = TwitterWrapper.GetTopMentioned(results.ToList());
+                topMentioned = topMentioned.OrderByDescending(top => top.Count).Take(5).ToList();
 
 
                 return new SearchResult() {  NumberOfTweets = results.Count() , TopFollowed = topFollowed.ToList(),
-                 TopRetweeted = topRetweeted.ToList() , TopMentioned = topMentioned.ToList()};
+                 TopRetweeted = topRetweeted.ToList() , TopMentioned = topMentioned};
                 
 
-                return null;
+               
 
             }catch(Exception s)
             {
@@ -75,10 +77,12 @@ namespace xceedAssignment.Controllers
             var topFollowed = results.OrderByDescending(tweet => tweet.Status.user.FollowersCount).Take(5).Select(tweet => tweet.Status);
 
             //Top Mentioned 
-            var topMentioned = results.OrderByDescending(tweet => tweet.Status.user.FriendsCount).Take(5).Select(tweet => tweet.Status);
+           // var topMentioned = results.OrderByDescending(tweet => tweet.Status.user.FriendsCount).Take(5).Select(tweet => tweet.Status);
+            var topMentioned = TwitterWrapper.GetTopMentioned(results.ToList());
+            topMentioned = topMentioned.OrderByDescending(top => top.Count).Take(5).ToList();
 
             return new SearchResult() { NumberOfTweets = results.Count() , TopFollowed = topFollowed.ToList(),
-             TopMentioned = topMentioned.ToList(), TopRetweeted = topRetweeted.ToList()};
+             TopMentioned = topMentioned, TopRetweeted = topRetweeted.ToList()};
 
         }
 

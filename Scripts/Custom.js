@@ -42,7 +42,7 @@ function GetAllTweets(keywords) {
 
             //add Top Mentioned
             var topMentioned = $("#topmentioned");
-            addElement(topMentioned, data.TopMentioned);
+            addMention(topMentioned, data.TopMentioned);
 
 
             var alldata = $("#alldata");
@@ -59,6 +59,15 @@ function GetAllTweets(keywords) {
 function addElement(element,data)
 {
     var template = $.templates("#twitterTemplate");
+
+    element.html(template.render(data));
+}
+
+//twitterMentioned
+
+function addMention(element,data)
+{
+    var template = $.templates("#twitterMentioned");
 
     element.html(template.render(data));
 }
